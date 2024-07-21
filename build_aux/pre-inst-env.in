@@ -24,7 +24,7 @@ PATH="@abs_top_builddir@/libcob/.libs:${PATH}"
 PATH="@abs_top_builddir@/cobc:@abs_top_builddir@/bin:${PATH}"
 echo "-------====="
 ls -lR "@abs_top_builddir@"
-echo `which cobc`
+cobc --help
 export PATH
 
 
