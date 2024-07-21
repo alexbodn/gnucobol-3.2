@@ -57,13 +57,13 @@ CODE_COVERAGE_LCOV_OPTIONS =  --no-external
 HELPSOURCES = help.c config.def flag.def warning.def $(top_srcdir)/configure.ac
 HELP2MAN_OPTS = --info-page=$(PACKAGE)
 
-if MAKE_HAS_PREREQ_ONLY
-cobc.1: $(HELPSOURCES) | $(COBC)
-	"$(top_builddir)/pre-inst-env" $(HELP2MAN) --output=$@ $(HELP2MAN_OPTS) $(COBC)
-else
-cobc.1: $(HELPSOURCES)
-	"$(top_builddir)/pre-inst-env" $(HELP2MAN) --output=$@ $(HELP2MAN_OPTS) $(COBC)
-endif
+#if MAKE_HAS_PREREQ_ONLY
+#cobc.1: $(HELPSOURCES) | $(COBC)
+#	"$(top_builddir)/pre-inst-env" $(HELP2MAN) --output=$@ $(HELP2MAN_OPTS) $(COBC)
+#else
+#cobc.1: $(HELPSOURCES)
+#	"$(top_builddir)/pre-inst-env" $(HELP2MAN) --output=$@ $(HELP2MAN_OPTS) $(COBC)
+#endif
 
 .l.c:
 	LC_CTYPE=C $(LEX) -o$@ $<
