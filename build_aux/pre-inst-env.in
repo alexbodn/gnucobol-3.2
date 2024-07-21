@@ -26,8 +26,8 @@ export PATH
 
 
 # trigger the preference of local instead of installed files
-#GNUCOBOL_UNINSTALLED=1
-#export GNUCOBOL_UNINSTALLED
+GNUCOBOL_UNINSTALLED=1
+export GNUCOBOL_UNINSTALLED
 
 # let atlocal know that there's less to setup
 GNUCOBOL_ENV_SETUP=1
