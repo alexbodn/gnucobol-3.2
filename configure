@@ -19642,6 +19642,9 @@ printf %s "checking for Berkeley DB library with BDB_LIBS... " >&6; }
 			if test "$cross_compiling" = yes
 then :
   LIBCOB_LIBS="$LIBCOB_LIBS $BDB_LIBS"
+			 printf "%s\n" "#define WITH_DB 1" >>confdefs.h
+
+
 else $as_nop
   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */

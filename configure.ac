@@ -1721,7 +1721,9 @@ if test "$with_db" = yes; then
 			cob_got_db=yes
 			LIBCOB_LIBS="$LIBCOB_LIBS $BDB_LIBS"],
 			[],
-			[LIBCOB_LIBS="$LIBCOB_LIBS $BDB_LIBS"])
+			[LIBCOB_LIBS="$LIBCOB_LIBS $BDB_LIBS"
+			 AC_DEFINE([WITH_DB], [1])
+			])
 		else
 			AC_MSG_CHECKING([for Berkeley DB library with version $COB_BDB_HEADER])
 			# prefer library with version number included as some systems link against wrong version
