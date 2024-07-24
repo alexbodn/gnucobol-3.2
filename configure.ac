@@ -1674,7 +1674,6 @@ if test "$with_db" = yes; then
 		 COB_BDB_HEADER_STR="cross"])
 	if test "x$COB_BDB_HEADER" = x; then
 		if test "x$BDB_HEADER" != x; then
-			COB_BDB_HEADER=$BDB_HEADER
 			AC_MSG_NOTICE([Unable to extract Berkeley DB version information. Accepting $BDB_HEADER.])
 		else
 			dnl BDB_HEADER could be aquired by preprocessing (cc -E) the following program:
@@ -1683,6 +1682,7 @@ if test "$with_db" = yes; then
 			dnl and piping thru tail -n 1
 			AC_MSG_ERROR([Unable to extract Berkeley DB version information.])
 		fi
+		COB_BDB_HEADER=$BDB_HEADER
 	fi
 	if test "x$COB_BDB_HEADER" = x; then
 		AC_MSG_ERROR([unable to extract Berkeley DB version information from db.h])
@@ -1766,10 +1766,15 @@ if test "$with_db" = yes; then
 			AC_MSG_ERROR([BDB library version $COB_BDB_HEADER is required for --with-db, you may adjust BDB_LIBS])
 		fi
 	else
-		AC_MSG_WARN([Matching BDB version (>=4.1) assumed])
-		AC_CHECK_LIB([db], [db_version],
-		[LIBCOB_LIBS="$LIBCOB_LIBS -ldb"],
-		AC_MSG_ERROR([BDB library is required as -ldb]), [])
+		if test "$COB_BDB_HEADER_STR" != "cross"; then
+			AC_MSG_WARN([Matching BDB version (>=4.1) assumed])
+			AC_CHECK_LIB([db], [db_version],
+			[LIBCOB_LIBS="$LIBCOB_LIBS -ldb"],
+			AC_MSG_ERROR([BDB library is required as -ldb]), [])
+		else
+			LIBCOB_LIBS="$LIBCOB_LIBS $BDB_LIBS"
+			AC_MSG_WARN([Setting BDB_LIBS to $BDB_LIBS.])
+		fi
 	fi
 	if test -n "$BDB_CFLAGS"; then
 	   LIBCOB_CPPFLAGS="$LIBCOB_CPPFLAGS $BDB_CFLAGS"

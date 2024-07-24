@@ -19601,12 +19601,12 @@ fi
 
 	if test "x$COB_BDB_HEADER" = x; then
 		if test "x$BDB_HEADER" != x; then
-			COB_BDB_HEADER=$BDB_HEADER
 			{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: Unable to extract Berkeley DB version information. Accepting $BDB_HEADER." >&5
 printf "%s\n" "$as_me: Unable to extract Berkeley DB version information. Accepting $BDB_HEADER." >&6;}
 		else
 															as_fn_error $? "Unable to extract Berkeley DB version information." "$LINENO" 5
 		fi
+		COB_BDB_HEADER=$BDB_HEADER
 	fi
 	if test "x$COB_BDB_HEADER" = x; then
 		as_fn_error $? "unable to extract Berkeley DB version information from db.h" "$LINENO" 5
@@ -19742,9 +19742,10 @@ printf "%s\n" "no" >&6; }
 			as_fn_error $? "BDB library version $COB_BDB_HEADER is required for --with-db, you may adjust BDB_LIBS" "$LINENO" 5
 		fi
 	else
-		{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: Matching BDB version (>=4.1) assumed" >&5
+		if test "$COB_BDB_HEADER_STR" != "cross"; then
+			{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: Matching BDB version (>=4.1) assumed" >&5
 printf "%s\n" "$as_me: WARNING: Matching BDB version (>=4.1) assumed" >&2;}
-		{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for db_version in -ldb" >&5
+			{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for db_version in -ldb" >&5
 printf %s "checking for db_version in -ldb... " >&6; }
 if test ${ac_cv_lib_db_db_version+y}
 then :
@@ -19786,6 +19787,11 @@ else $as_nop
   as_fn_error $? "BDB library is required as -ldb" "$LINENO" 5
 fi
 
+		else
+			LIBCOB_LIBS="$LIBCOB_LIBS $BDB_LIBS"
+			{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: Setting BDB_LIBS to $BDB_LIBS." >&5
+printf "%s\n" "$as_me: WARNING: Setting BDB_LIBS to $BDB_LIBS." >&2;}
+		fi
 	fi
 	if test -n "$BDB_CFLAGS"; then
 	   LIBCOB_CPPFLAGS="$LIBCOB_CPPFLAGS $BDB_CFLAGS"
