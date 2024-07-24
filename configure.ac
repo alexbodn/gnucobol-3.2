@@ -1640,6 +1640,7 @@ AS_IF([test "$with_cisam" != yes -a "$with_disam" != yes -a "$with_vbisam" != ye
 
 # Checks for db.
 AC_ARG_VAR([BDB_CFLAGS], [compiler flags necessary to preprocess/compile for Berkeley DB])
+AC_ARG_VAR([BDB_HEADER], [major.minor version of Berkeley DB if not found by system])
 AC_ARG_VAR([BDB_LIBS], [linker flags for Berkeley DB, overriding automatic lookup])
 if test "$with_db" = yes; then
 	AC_MSG_NOTICE([Checks for Berkeley DB ...])
