@@ -1666,14 +1666,25 @@ if test "$with_db" = yes; then
 			return 0;
 		}
 		]])],
-		[COB_BDB_HEADER=$(./conftest$ac_exeext x)]
-		[COB_BDB_HEADER_STR=$(./conftest$ac_exeext x y)],
+		[COB_BDB_HEADER=$(./conftest$ac_exeext x)
+		 COB_BDB_HEADER_STR=$(./conftest$ac_exeext x y)],
 		[AC_MSG_ERROR([unable to extract Berkeley DB version information from db.h])],
 		[AC_MSG_WARN([cannot run test program while cross-compiling])
-		 COB_BDB_HEADER="cross"
 		 COB_BDB_HEADER_STR="cross"])
 	if test "x$COB_BDB_HEADER" = x; then
-		AC_MSG_ERROR([Unable to extract Berkeley DB version information])
+		if test "x$BDB_HEADER" != x; then
+			COB_BDB_HEADER=$BDB_HEADER
+			AC_MSG_NOTICE([Unable to extract Berkeley DB version information. Accepting $BDB_HEADER.])
+		else
+			dnl BDB_HEADER could be aquired by preprocessing (cc -E) the following program:
+			dnl #include <db.h>
+			dnl DB_VERSION_MAJOR.DB_VERSION_MINOR
+			dnl and piping thru tail -n 1
+			AC_MSG_ERROR([Unable to extract Berkeley DB version information.])
+		fi
+	fi
+	if test "x$COB_BDB_HEADER" = x; then
+		AC_MSG_ERROR([unable to extract Berkeley DB version information from db.h])
 	fi
 	if test "x$COB_BDB_HEADER_STR" != x; then
 		AC_MSG_NOTICE([db.h reports version "$COB_BDB_HEADER_STR"])
@@ -1709,7 +1720,7 @@ if test "$with_db" = yes; then
 			cob_got_db=yes
 			LIBCOB_LIBS="$LIBCOB_LIBS $BDB_LIBS"],
 			[],
-			[])
+			[LIBCOB_LIBS="$LIBCOB_LIBS $BDB_LIBS"])
 		else
 			AC_MSG_CHECKING([for Berkeley DB library with version $COB_BDB_HEADER])
 			# prefer library with version number included as some systems link against wrong version
@@ -1733,7 +1744,11 @@ if test "$with_db" = yes; then
 				LIBCOB_LIBS="$LIBCOB_LIBS -l$cobdb"
 				break],
 				[],
-				[])
+				[AC_DEFINE([WITH_DB], [1])
+				cob_got_db=yes
+				LIBCOB_LIBS="$LIBCOB_LIBS -ldb"
+				break]
+				)
 			done
 		fi
 		LIBS="$test_libs"
