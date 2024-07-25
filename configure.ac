@@ -1722,6 +1722,7 @@ if test "$with_db" = yes; then
 			LIBCOB_LIBS="$LIBCOB_LIBS $BDB_LIBS"],
 			[],
 			[LIBCOB_LIBS="$LIBCOB_LIBS $BDB_LIBS"
+			 cob_got_db=yes
 			 AC_DEFINE([WITH_DB], [1])
 			])
 		else
