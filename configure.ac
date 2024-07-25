@@ -1781,6 +1781,7 @@ if test "$with_db" = yes; then
 	fi
 	if test -n "$BDB_CFLAGS"; then
 	   LIBCOB_CPPFLAGS="$LIBCOB_CPPFLAGS $BDB_CFLAGS"
+	   COB_CPPFLAGS="$COB_CPPFLAGS $BDB_CFLAGS"
 	fi
 	CPPFLAGS="$curr_cppflags"
 	unset cobdb
