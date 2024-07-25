@@ -2761,7 +2761,7 @@ cobc_print_info (void)
 	cobc_var_print ("DEBUG_LOG",		_("enabled"), 0);
 #endif
 
-cobc_var_print ("WITH_DB", WITH_DB);
+cobc_var_print ("WITH_DB", WITH_DB, 0);
 }
 
 static void
