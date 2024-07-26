@@ -19590,8 +19590,8 @@ else $as_nop
 _ACEOF
 if ac_fn_c_try_run "$LINENO"
 then :
-  COB_BDB_HEADER=$(./conftest$ac_exeext x)
-		 COB_BDB_HEADER_STR=$(./conftest$ac_exeext x y)
+  		COB_BDB_HEADER=$(./conftest$ac_exeext x)
+		COB_BDB_HEADER_STR=$(./conftest$ac_exeext x y)
 else $as_nop
   as_fn_error $? "unable to extract Berkeley DB version information from db.h" "$LINENO" 5
 fi
@@ -19604,7 +19604,7 @@ fi
 			{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: Unable to extract Berkeley DB version information. Accepting $BDB_HEADER." >&5
 printf "%s\n" "$as_me: Unable to extract Berkeley DB version information. Accepting $BDB_HEADER." >&6;}
 		else
-															as_fn_error $? "Unable to extract Berkeley DB version information." "$LINENO" 5
+												as_fn_error $? "unable to extract Berkeley DB version information from db.h" "$LINENO" 5
 		fi
 		COB_BDB_HEADER=$BDB_HEADER
 	fi
@@ -19641,11 +19641,10 @@ printf %s "checking for Berkeley DB library with BDB_LIBS... " >&6; }
 			LIBS="$test_libs $BDB_LIBS"
 			if test "$cross_compiling" = yes
 then :
-  LIBCOB_LIBS="$LIBCOB_LIBS $BDB_LIBS"
-			 cob_got_db=yes
-			 printf "%s\n" "#define WITH_DB 1" >>confdefs.h
-
-
+  { { printf "%s\n" "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
+printf "%s\n" "$as_me: error: in \`$ac_pwd':" >&2;}
+as_fn_error $? "cannot run test program while cross compiling
+See \`config.log' for more details" "$LINENO" 5; }
 else $as_nop
   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
@@ -19689,12 +19688,10 @@ printf %s "checking for Berkeley DB library with version $COB_BDB_HEADER... " >&
 				LIBS="$test_libs -l$cobdb"
 				if test "$cross_compiling" = yes
 then :
-  printf "%s\n" "#define WITH_DB 1" >>confdefs.h
-
-				cob_got_db=yes
-				LIBCOB_LIBS="$LIBCOB_LIBS -ldb"
-				break
-
+  { { printf "%s\n" "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
+printf "%s\n" "$as_me: error: in \`$ac_pwd':" >&2;}
+as_fn_error $? "cannot run test program while cross compiling
+See \`config.log' for more details" "$LINENO" 5; }
 else $as_nop
   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */

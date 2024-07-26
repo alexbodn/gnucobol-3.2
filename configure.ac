@@ -1667,8 +1667,9 @@ if test "$with_db" = yes; then
 			return 0;
 		}
 		]])],
-		[COB_BDB_HEADER=$(./conftest$ac_exeext x)
-		 COB_BDB_HEADER_STR=$(./conftest$ac_exeext x y)],
+		dnl would be simpler to extract with the preprocessor
+		[COB_BDB_HEADER=$(./conftest$ac_exeext x)]
+		[COB_BDB_HEADER_STR=$(./conftest$ac_exeext x y)],
 		[AC_MSG_ERROR([unable to extract Berkeley DB version information from db.h])],
 		[AC_MSG_WARN([cannot run test program while cross-compiling])
 		 COB_BDB_HEADER_STR="cross"])
@@ -1720,10 +1721,7 @@ if test "$with_db" = yes; then
 			cob_got_db=yes
 			LIBCOB_LIBS="$LIBCOB_LIBS $BDB_LIBS"],
 			[],
-			[LIBCOB_LIBS="$LIBCOB_LIBS $BDB_LIBS"
-			 cob_got_db=yes
-			 AC_DEFINE([WITH_DB], [1])
-			])
+			[])
 		else
 			AC_MSG_CHECKING([for Berkeley DB library with version $COB_BDB_HEADER])
 			# prefer library with version number included as some systems link against wrong version
@@ -1747,11 +1745,7 @@ if test "$with_db" = yes; then
 				LIBCOB_LIBS="$LIBCOB_LIBS -l$cobdb"
 				break],
 				[],
-				[AC_DEFINE([WITH_DB], [1])
-				cob_got_db=yes
-				LIBCOB_LIBS="$LIBCOB_LIBS -ldb"
-				break]
-				)
+				[])
 			done
 		fi
 		LIBS="$test_libs"
