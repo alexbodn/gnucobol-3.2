@@ -1058,10 +1058,10 @@ code-coverage-capture-hook:
 clean-local: code-coverage-clean
 dist-clean-local: code-coverage-dist-clean
 
-#@MAKE_HAS_PREREQ_ONLY_TRUE@cobc.1: $(HELPSOURCES) | $(COBC)
-#@MAKE_HAS_PREREQ_ONLY_TRUE@	"$(top_builddir)/pre-inst-env" $(HELP2MAN) --output=$@ $(HELP2MAN_OPTS) $(COBC)
-#@MAKE_HAS_PREREQ_ONLY_FALSE@cobc.1: $(HELPSOURCES)
-#@MAKE_HAS_PREREQ_ONLY_FALSE@	"$(top_builddir)/pre-inst-env" $(HELP2MAN) --output=$@ $(HELP2MAN_OPTS) $(COBC)
+@MAKE_HAS_PREREQ_ONLY_TRUE@cobc.1: $(HELPSOURCES) | $(COBC)
+@MAKE_HAS_PREREQ_ONLY_TRUE@	"$(top_builddir)/pre-inst-env" $(HELP2MAN) --output=$@ $(HELP2MAN_OPTS) $(COBC)
+@MAKE_HAS_PREREQ_ONLY_FALSE@cobc.1: $(HELPSOURCES)
+@MAKE_HAS_PREREQ_ONLY_FALSE@	"$(top_builddir)/pre-inst-env" $(HELP2MAN) --output=$@ $(HELP2MAN_OPTS) $(COBC)
 
 .l.c:
 	LC_CTYPE=C $(LEX) -o$@ $<
