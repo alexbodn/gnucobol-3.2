@@ -1680,7 +1680,8 @@ if test "$with_db" = yes; then
 			dnl #include <db.h>
 			dnl DB_VERSION_MAJOR.DB_VERSION_MINOR
 			dnl and piping thru tail -n 1
-			AC_MSG_ERROR([Unable to extract Berkeley DB version information.])
+			BDB_HEADER=$(cat db_header.c |cc -P -E -| tail -n 1| sed -e 's/[\ \t]//g')
+			AC_MSG_NOTICE([Detected installed libdb version $BDB_HEADER.])
 		fi
 		COB_BDB_HEADER=$BDB_HEADER
 	fi

@@ -1,0 +1,2 @@
+#include <db.h>
+DB_VERSION_MAJOR.DB_VERSION_MINOR
