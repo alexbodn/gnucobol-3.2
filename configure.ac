@@ -1676,12 +1676,10 @@ if test "$with_db" = yes; then
 		if test "x$BDB_HEADER" != x; then
 			AC_MSG_NOTICE([Unable to extract Berkeley DB version information. Accepting $BDB_HEADER.])
 		else
-			dnl BDB_HEADER could be aquired by preprocessing (cc -E) the following program:
-			dnl #include <db.h>
-			dnl DB_VERSION_MAJOR.DB_VERSION_MINOR
-			dnl and piping thru tail -n 1
-			BDB_HEADER=$(cat db_header.c |cc -P -E -| tail -n 1| sed -e 's/[\ \t]//g')
-			AC_MSG_NOTICE([Detected installed libdb version $BDB_HEADER.])
+			dnl the following line won't run as is, but maybe can be fooled somehow
+			dnl BDB_HEADER=$(cat db_header.c |cc -P -E -| tail -n 1| sed -e 's/[\ \t]//g')
+			dnl AC_MSG_NOTICE([Detected installed libdb version $BDB_HEADER.])
+			AC_MSG_ERROR([unable to extract Berkeley DB version information from db.h])
 		fi
 		COB_BDB_HEADER=$BDB_HEADER
 	fi
