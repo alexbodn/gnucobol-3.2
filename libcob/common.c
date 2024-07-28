@@ -5974,9 +5974,9 @@ cob_gettmpdir (void)
 #else
 	 && (tmpdir = check_valid_env_tmpdir ("TMP")) == NULL
 	 && (tmpdir = check_valid_env_tmpdir ("TEMP")) == NULL) {
-		if (!check_valid_dir ("@TERMUX_PREFIX@/tmp")) {
-			tmp = cob_fast_malloc (strlen("@TERMUX_PREFIX@") + 5U);
-			strcpy (tmp, "@TERMUX_PREFIX@/tmp");
+		if (!check_valid_dir ("/tmp")) {
+			tmp = cob_fast_malloc (5U);
+			strcpy (tmp, "/tmp");
 			tmpdir = tmp;
 		}
 #endif
